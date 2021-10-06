@@ -1,0 +1,85 @@
+  
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Search Game Prices</title>
+
+    <!-- Bootstrap core CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .align-right {
+        margin-right: 20px;
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='album.css') }}" rel="stylesheet">
+  </head>
+  <body>
+
+<main role="main">
+  <div class="align-right">
+  <a class = "btn btn-primary my-2" style="float: right;" href= "https://find-game-prices-low-data.herokuapp.com/" >Click here to go to Low Data Mode</a> </p>
+  </div>
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Search Games Across Different Stores</h1>
+      <p class="lead text-muted">Get the lowest prices for your searched game</p>
+      <form method="GET">
+      <div class="input-group mb-3">
+        <input type="text" name="query" class="form-control">
+      </div>
+      <p>
+        <button type="submit" name="submit" value="search" class="btn btn-primary my-2">Search</button>
+        
+      </p>
+      </form>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        {% for game in games %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+              <center><img src={{game.thumbnail}} alt={{game.title}} width="310" height="175"></center>
+              <p></p>
+              <h5><b class="card-text">{{ game.title}}</b></h5>
+              <b class="card-text">Price: ${{game.price}}</b>
+              <p></p>
+              <p class="card-text">Discount: {{game.discount}}%</p>
+              <p class="card-text">Intial price: ${{game.initialprice}}</p>
+              <center><a class = "btn btn-primary my-2" href= {{game.link}} target="_blank">Purchase Game from {{game.store}}</a> </p></center>
+              <div class="d-flex justify-content-between align-items-center">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</main>
+</body>
+</html>
